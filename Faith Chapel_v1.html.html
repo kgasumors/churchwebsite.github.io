@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faith Chapel | White, Blue & Grace</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font (optional but clean) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    /* ----- ROOT & THEME (white, blue, gray) ----- */
+    :root {
+      --faith-blue: #0a4b7a;        /* deep trustworthy blue */
+      --faith-light-blue: #e6f0fa;  /* very light blue background */
+      --faith-gray: #6c757d;         /* bootstrap secondary gray */
+      --faith-light-gray: #f8f9fa;   /* near white / gray */
+      --faith-white: #ffffff;
+      --faith-dark-blue: #063357;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--faith-white);
+      color: #212529;
+      scroll-behavior: smooth;
+    }
+    /* navigation & footers */
+    .navbar {
+      background-color: var(--faith-white) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .navbar .nav-link {
+      color: var(--faith-gray) !important;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: var(--faith-blue) !important;
+    }
+    .btn-faith {
+      background-color: var(--faith-blue);
+      color: white;
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .btn-faith:hover {
+      background-color: var(--faith-dark-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10,75,122,0.3);
+    }
+    .btn-outline-faith {
+      border: 2px solid var(--faith-blue);
+      color: var(--faith-blue);
+      border-radius: 30px;
+      background: transparent;
+      transition: 0.3s;
+    }
+    .btn-outline-faith:hover {
+      background-color: var(--faith-blue);
+      color: white;
+    }
+    /* section headings */
+    .section-title {
+      color: var(--faith-blue);
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 3px;
+      background-color: var(--faith-blue);
+      border-radius: 2px;
+    }
+    /* card styling with animations */
+    .faith-card {
+      background-color: var(--faith-white);
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+    .faith-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(10,75,122,0.1);
+    }
+    .faith-card .card-title {
+      color: var(--faith-blue);
+      font-weight: 600;
+    }
+    .bg-light-blue {
+      background-color: var(--faith-light-blue);
+    }
+    .text-faith-blue {
+      color: var(--faith-blue);
+    }
+    .text-faith-gray {
+      color: var(--faith-gray);
+    }
+    /* hero / page header with fade-in */
+    .page-header {
+      background: linear-gradient(145deg, var(--faith-light-blue) 0%, #ffffff 80%);
+      padding: 3rem 0 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(10,75,122,0.1);
+      animation: fadeInDown 0.8s ease;
+    }
+    /* animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .animate-down {
+      animation: fadeInDown 0.8s ease forwards;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    /* live stream indicator */
+    .live-badge {
+      background-color: #dc3545;
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-left: 8px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); background-color: #b02a37; }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    /* footer */
+    .footer {
+      background-color: var(--faith-light-gray);
+      color: var(--faith-gray);
+      border-top: 2px solid rgba(10,75,122,0.1);
+    }
+    .footer a {
+      color: var(--faith-blue);
+      text-decoration: none;
+    }
+    /* events list */
+    .event-item {
+      border-left: 4px solid var(--faith-blue);
+      background-color: #fafcfd;
+      padding: 1rem;
+      border-radius: 0 1rem 1rem 0;
+      transition: background-color 0.2s;
+    }
+    .event-item:hover {
+      background-color: var(--faith-light-blue);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-3" href="#" style="color: var(--faith-blue);">
+      <i class="fas fa-church me-2" style="color: var(--faith-blue);"></i>Faith Chapel
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFaith" aria-controls="navbarFaith">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarFaith">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sermons">Sermons</a></li>
+        <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ministries">Ministries</a></li>
+        <li class="nav-item"><a class="nav-link" href="#live">Live Stream</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== MAIN CONTENT (multi‑page simulation using IDs) ========== -->
+
+<!-- HOME / HERO section (acts as welcome + quick links) -->
+<section id="home" class="py-5 bg-light-blue">
+  <div class="container py-4">
+    <div class="row align-items-center">
+      <div class="col-lg-6 animate-down">
+        <h1 class="display-4 fw-bold" style="color: var(--faith-blue);">Welcome Home</h1>
+        <p class="lead text-faith-gray">A place of grace, growth, and genuine community. Join us this Sunday at 10am.</p>
+        <a href="#live" class="btn btn-faith btn-lg me-2"><i class="fas fa-video me-2"></i>Live Stream</a>
+        <a href="#about" class="btn btn-outline-faith btn-lg">Learn More</a>
+      </div>
+      <div class="col-lg-6 animate-up delay-1 text-center">
+        <img src="https://placehold.co/600x400/0a4b7a/white?text=Faith+Chapel" alt="church" class="img-fluid rounded-4 shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT page fragment -->
+<section id="about" class="py-5">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="row g-4">
+      <div class="col-md-6 animate-up">
+        <div class="faith-card p-4">
+          <i class="fas fa-heart fa-3x text-faith-blue mb-3"></i>
+          <h4 class="card-title">Our Story</h4>
+          <p>Founded in 1985, Faith Chapel exists to lead people into a growing relationship with Jesus Christ. We are a multi-generational family marked by grace and truth.</p>
+        </div>
+      </div>
+      <div class="col-md-6 animate-up delay-1">
+        <div class="faith-card p-4">
+          <i class="fas fa-hand-holding-heart fa-3x text-faith-blue mb-3"></i>
+          <h4 class="card-title">What We Believe</h4>
+          <p>We believe in the Bible, the power of prayer, and serving our community. Our doctrine is centered on Christ’s love and the Holy Spirit’s guidance.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="p-4 bg-light-blue rounded-4 animate-up delay-2">
+          <h4 class="text-faith-blue"><i class="fas fa-users me-2"></i>Meet Our Pastors</h4>
+          <div class="row">
+            <div class="col-md-6">Pastor John & Lisa Mitchell — Lead pastors since 2005, with a heart for discipleship.</div>
+            <div class="col-md-6">Pastor David Chen — Youth & families, passionate about the next generation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERMONS page -->
+<section id="sermons" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title">Recent Sermons</h2>
+    <div class="row g-4">
+      <div class="col-md-4 animate-up">
+        <div class="faith-card p-3">
+          <img src="https://placehold.co/600x400/e6f0fa/0a4b7a?text=Sermon+1" class="card-img-top rounded-3" alt="sermon">
+          <div class="card-body">
+            <h5 class="card-title">The Way of Grace</h5>
+            <p class="text-faith-gray">Eph 2:8-9 · Pastor John · Mar 12, 2025</p>
+            <a href="#" class="btn btn-sm btn-outline-faith">Listen <i class="fas fa-play ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate-up delay-1">
+        <div class="faith-card p-3">
+          <img src="https://placehold.co/600x400/e6f0fa/0a4b7a?text=Sermon+2" class="card-img-top rounded-3" alt="sermon">
+          <div class="card-body">
+            <h5 class="card-title">Faith Like a Child</h5>
+            <p class="text-faith-gray">Mark 10:13-16 · Pastor Lisa · Mar 5, 2025</p>
+            <a href="#" class="btn btn-sm btn-outline-faith">Listen <i class="fas fa-play ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate-up delay-2">
+        <div class="faith-card p-3">
+          <img src="https://placehold.co/600x400/e6f0fa/0a4b7a?text=Sermon+3" class="card-img-top rounded-3" alt="sermon">
+          <div class="card-body">
+            <h5 class="card-title">Prayer That Moves</h5>
+            <p class="text-faith-gray">James 5:16 · Pastor David · Feb 26, 2025</p>
+            <a href="#" class="btn btn-sm btn-outline-faith">Listen <i class="fas fa-play ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS page -->
+<section id="events" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Upcoming Events</h2>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="event-item mb-3 animate-up">
+          <div class="d-flex flex-wrap align-items-center">
+            <div class="flex-shrink-0 text-center me-3" style="width: 70px;">
+              <span class="fw-bold fs-4 text-faith-blue">23</span><br><span class="text-faith-gray">MAR</span>
+            </div>
+            <div class="flex-grow-1">
+              <h5 class="text-faith-blue">Community Breakfast</h5>
+              <p class="mb-0 text-faith-gray">8:30 AM @ Fellowship Hall – join us for pancakes & connection.</p>
+            </div>
+          </div>
+        </div>
+        <div class="event-item mb-3 animate-up delay-1">
+          <div class="d-flex flex-wrap align-items-center">
+            <div class="flex-shrink-0 text-center me-3" style="width: 70px;">
+              <span class="fw-bold fs-4 text-faith-blue">30</span><br><span class="text-faith-gray">MAR</span>
+            </div>
+            <div class="flex-grow-1">
+              <h5 class="text-faith-blue">Easter Sunday Service</h5>
+              <p class="mb-0 text-faith-gray">10:00 AM Sanctuary – celebrate the risen Christ!</p>
+            </div>
+          </div>
+        </div>
+        <div class="event-item mb-3 animate-up delay-2">
+          <div class="d-flex flex-wrap align-items-center">
+            <div class="flex-shrink-0 text-center me-3" style="width: 70px;">
+              <span class="fw-bold fs-4 text-faith-blue">05</span><br><span class="text-faith-gray">APR</span>
+            </div>
+            <div class="flex-grow-1">
+              <h5 class="text-faith-blue">Men's Prayer Breakfast</h5>
+              <p class="mb-0 text-faith-gray">7:30 AM @ The Loft – all men welcome.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINISTRIES page (extra) -->
+<section id="ministries" class="py-5 bg-light-blue">
+  <div class="container">
+    <h2 class="section-title">Our Ministries</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 animate-up">
+        <div class="faith-card text-center p-4">
+          <i class="fas fa-child fa-3x text-faith-blue mb-3"></i>
+          <h5>Children's Ministry</h5>
+          <p class="small text-faith-gray">Nursery–5th grade, every Sunday.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 animate-up delay-1">
+        <div class="faith-card text-center p-4">
+          <i class="fas fa-bible fa-3x text-faith-blue mb-3"></i>
+          <h5>Youth Group</h5>
+          <p class="small text-faith-gray">Grades 6–12, Wednesdays 7pm.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 animate-up delay-2">
+        <div class="faith-card text-center p-4">
+          <i class="fas fa-hands-helping fa-3x text-faith-blue mb-3"></i>
+          <h5>Missions</h5>
+          <p class="small text-faith-gray">Local & global outreach.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 animate-up delay-3">
+        <div class="faith-card text-center p-4">
+          <i class="fas fa-music fa-3x text-faith-blue mb-3"></i>
+          <h5>Worship Team</h5>
+          <p class="small text-faith-gray">Vocals, band, sound.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STREAM page (extra) -->
+<section id="live" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Live Stream <span class="live-badge"><i class="fas fa-circle me-1"></i>LIVE</span></h2>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="faith-card p-4 text-center animate-up">
+          <div class="ratio ratio-16x9 mb-4">
+            <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?si=9VVi6nVW_yStVvBk" title="YouTube live stream placeholder" allowfullscreen></iframe>
+          </div>
+          <h4 class="text-faith-blue">Sunday Worship — 10:00 AM</h4>
+          <p class="text-faith-gray">Join us live or watch previous services. If technical issues occur, refresh.</p>
+          <a href="#" class="btn btn-faith"><i class="fas fa-bell me-2"></i>Remind me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT page -->
+<section id="contact" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="row g-5">
+      <div class="col-md-6 animate-up">
+        <div class="faith-card p-4">
+          <h5><i class="fas fa-map-pin text-faith-blue me-2"></i>Visit</h5>
+          <p>210 Faith Avenue, Graceville, ST 12345</p>
+          <h5 class="mt-4"><i class="fas fa-phone-alt text-faith-blue me-2"></i>Call</h5>
+          <p>(555) 123-4567</p>
+          <h5 class="mt-4"><i class="fas fa-envelope text-faith-blue me-2"></i>Email</h5>
+          <p>hello@faithchapel.org</p>
+          <div class="mt-4">
+            <a href="#" class="text-faith-blue me-3 fs-4"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-faith-blue me-3 fs-4"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="text-faith-blue fs-4"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 animate-up delay-1">
+        <div class="faith-card p-4">
+          <form>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Your name" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" placeholder="Email address">
+            </div>
+            <div class="mb-3">
+              <textarea rows="4" class="form-control" placeholder="Message..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-faith w-100">Send message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer py-4">
+  <div class="container text-center">
+    <p class="mb-0">© 2025 Faith Chapel. All rights reserved. White, blue & gray theme.</p>
+    <p class="small mt-2">
+      <a href="#home">Home</a> | <a href="#about">About</a> | <a href="#sermons">Sermons</a> | <a href="#events">Events</a> | <a href="#ministries">Ministries</a> | <a href="#live">Live</a> | <a href="#contact">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS (for navbar collapse, etc.) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- optional JavaScript for smooth highlight on scroll (very minimal) -->
+<script>
+  (function() {
+    // highlight active nav link while scrolling (simple)
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  })();
+</script>
+<!-- note: some placeholder images from placehold.co, live embed uses a youtube placeholder, safe and demo-friendly -->
+</body>
+</html>
